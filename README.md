@@ -1,6 +1,6 @@
 # To Do List with User Registration & Login
 
-To Do List with User Registration, Login, Search and CRUD with Django.
+To Do List with user registration, login, search and CRUD with Django.
 
 Class Based Views links:
 
