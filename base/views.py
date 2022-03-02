@@ -1,3 +1,4 @@
+from re import search
 from django.shortcuts import redirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -43,6 +44,13 @@ class TaskList(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['task_list'] = context['task_list'].filter(user=self.request.user)
         context['count'] = context['task_list'].filter(complete=False).count()
+
+        search_input = self.request.GET.get('search-area') or ''
+        if search_input:
+            context['task_list'] = context['task_list'].filter(title__icontains=search_input)
+
+        context['search_input'] = search_input
+
         return context
 
 class TaskDetail(LoginRequiredMixin, DetailView):
