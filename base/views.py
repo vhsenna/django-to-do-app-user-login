@@ -10,6 +10,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from .models import Task
 
+
 class CustomLoginView(LoginView):
     template_name = 'base/login.html'
     fields = '__all__'
@@ -17,6 +18,7 @@ class CustomLoginView(LoginView):
 
     def get_success_url(self):
         return reverse_lazy('task_list')
+
 
 class RegisterPage(FormView):
     template_name = 'base/register.html'
@@ -53,9 +55,11 @@ class TaskList(LoginRequiredMixin, ListView):
 
         return context
 
+
 class TaskDetail(LoginRequiredMixin, DetailView):
     model = Task
     context_object_name = 'task_detail'
+
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
@@ -66,10 +70,12 @@ class TaskCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super(TaskCreate, self).form_valid(form)
 
+
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
     fields = ['title', 'description', 'complete']
     success_url = reverse_lazy('task_list')
+
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
