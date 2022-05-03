@@ -1,1 +1,1 @@
-web: gunicorn todo.wsgihe
+web: gunicorn todo.wsgi
